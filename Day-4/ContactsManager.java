@@ -125,7 +125,7 @@ public class ContactsManager {
     }
 
     // Any additional method that you want to implement by yourself.
-    public string tostring()
+    public String tostring()
     {
         String s = "";
         for(Contact friend : myFriends)

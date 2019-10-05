@@ -9,7 +9,7 @@
  */
 
 //  Your code goes here... For Contact class
-public final class contact
+public final class Contact
 {
     private String name;
     private String email;
@@ -27,7 +27,7 @@ public final class contact
  {
      this.name = name1;
  }
-public String getname()
+public String getName()
 {
     return this.name;
 }
@@ -37,9 +37,9 @@ public void setEmail(final String email1)
 }
 public String getEmail()
 {
-    return this.email1;
+    return this.email;
 }
-public String getPhoneNumber(final String phn)
+public void setPhoneNumber(final String phn)
 {
     this.phoneNumber = phn;
 }
