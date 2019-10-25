@@ -12,7 +12,6 @@
  */
 
 public class BinaryToDecimal {
-
     /**
      * This method reads in a Binary String and returns the equivalent to the
      * decimal value of the binary string.
@@ -20,6 +19,15 @@ public class BinaryToDecimal {
      * @return the decimal number n of the binary string.
      */
     public static int binaryToDecimal(String s) {
-        
+        char[] gfg = s.toCharArray();
+        int num=0;
+        for (int i=0 ;i<gfg.length;i++ ){
+                num+=(Math.pow(2,gfg.length-i-1))*((int) gfg[i]-48);
+            
+        }
+        return num;
     }
+
+/*    public static void main(String[] args) {
+        System.out.println(binaryToDecimal("100"));*/
 }

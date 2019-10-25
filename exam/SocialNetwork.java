@@ -25,10 +25,8 @@ public class SocialNetwork {
     public SocialNetwork() {
         // TODO
         // Your code goes here
-        users = new user[50];
+        users = new user[100];
         size = 0;
-
-
     }
 
     /**
@@ -40,17 +38,27 @@ public class SocialNetwork {
     public void createDataStructure(String str) {
         // TODO
         // Your code goes here
-        String[] details;
-        String[] followers;
-        String userArray = str.split(";")
-        for(int i = 0 ; i < userArray.length ; i++)
+        if(str.length > 0)
         {
-            details = userArray[i].split(" is connected to ");
-            user[size].setUserName(details[0]);
-            folowers = details[1].split(" ,");
-            size = size ++;
+            String[] data = str.split(";");
+            String str1;
+            for(int i = 0 ; i < data.length ; i++)
+            {
+                str1 = data[i].replaceOf(" is connected to " , ",");
+                String[] words = str1.split(",");
+                User u1 = new User(words[0]);
+                addUser(u1);
+                for(int j = 1 ; i < words.length ;j++)
+                {
+                    User u2 = new User(words[j]);
+                    addUser(u2);
+                    u1 = getUser(words[0]);
+                    addConnection(u1 ,u2);
+                }
+
+            }
+
         }
-        return;
     }
 
     private boolean searchUser(User user) {
@@ -72,7 +80,7 @@ public class SocialNetwork {
      */
     public User getUser(String userName) {
         for (int i = 0; i < size; i++) {
-            if (userName.equals(users[i].getUserName())) {
+            if (userName.equals(users[i].userName) {
                 return users[i];
             }
         }
@@ -88,19 +96,13 @@ public class SocialNetwork {
     public void addUser(User userA) {
         // TODO
         // Your code goes here
-        for ( int i = ; i < size ; i ++)
+        if(!(searchUser(userA)))
         {
-            if(userA.equals(users[i]))
-            {
-                flag = true;
-                break;
-            }
-            if !(flag )
-            {
-                users[size++] = userA;
-            }
+            users[size] = userA;
+            size++;
+        }
 
-    }
+        
     }
     
 
@@ -119,17 +121,11 @@ public class SocialNetwork {
     public void addConnection(User userA, User userB) {
         // TODO
         // Your code goes here
-        if(searchUser(User userA) == true && searchUser(User userB) == true);
-        {
-            userA[numberOfConnections] = userB;
-            numberOfConnections++;
-            
-             
-                 
-
-        }
-
-        
+            if(searchUser(userA) && searchUser(userB))
+            {
+                userA.userConnections[numberOfConnections] = userB;
+                userA.numberOfConnections++;
+            }
     }
 
     /**
@@ -145,6 +141,11 @@ public class SocialNetwork {
     public User[] getConnections(User userA) {
         // TODO
         // Your code goes here
+        // pranay's code
+        if((searchUser(userA)) && (userA.numberOfConnections > 0))
+        {
+            return userA.userConnections;
+        }
         return null;
     }
 
@@ -162,6 +163,26 @@ public class SocialNetwork {
     public User[] getCommonConnections(User userA, User userB) {
         // TODO
         // Your code goes here
+        //pranay's code
+        
+        int numberOfCommConc = 0;
+        if(searchUser(userA) && searchUser(userB))
+        {
+            User[] commonConc = new user[userA.numberOfConnections + userB.numberOfConnections] ;
+            for(int i = 0 ; i < userA.numberOfConnections ; i++)
+            {
+                for(int j = 0 ; j < userB.numberOfConnections ; j++)
+                {
+                    if(userA.userConnections[i].userName.equals(userB.userConnections[j].userName))
+                    {
+                        commonConc[numberOfCommConc]=userA.userConnections[i];
+                        numberOfCommConc++;
+
+                    }
+                }
+            }
+            return commonConc;
+        }   
         return null;
     }
 

@@ -13,8 +13,12 @@
      * @return a^b which is a long value.
      */
      public static long pow(int a, int b) {
-        double i = Math.pow(a,b);
-        return i;
+        long res = 1;
+        for(int i = 0 ; i< b; i++)
+        {
+           res *= a;
+        }
+        return res;
      }
 
      /**
@@ -25,8 +29,13 @@
      * @return a^b which is a long value.
      */
      public static double pow(float a, int b) {
-        double j = Math.pow(a,b);
-        return j;
+        double res = 1.0;
+        for(int i = 0; i< b; i++)
+        {
+           res *= a;
+        }
+        return res;
+
         
      }
  }

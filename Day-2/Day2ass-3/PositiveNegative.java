@@ -31,7 +31,7 @@
         }
         else if ((negative == false) && ((a > 0) && (b < 0)))
         {
-            return true
+            return true;
         }
         else if ((negative == true) && ((a < 0) && (b < 0)))
         {

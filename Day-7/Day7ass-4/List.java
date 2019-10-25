@@ -77,6 +77,9 @@ public class List {
         // How many items do we have in the list when you create it?
         // An empty list has how many items?
         // That is the initial value to use for size.
+        size = 0;
+        list = new int[]{0,0,0,0,0,0,0,0,0,0};
+        // capacity =list.length;
         
     }
 
@@ -97,6 +100,9 @@ public class List {
     public List(int capacity) {
         size = 0;
         list = new int[capacity];
+        for (int i =0; i < capacity;i++){
+            list[i]=0;
+        }
     }
     
     /*
@@ -112,6 +118,12 @@ public class List {
      */
     public void add(int item) {
         //Inserts the specified element at the end of the list.
+        if(this.size == this.list.length){
+            this.resize();
+        }
+        list[this.size] = item;
+        this.size++;
+        
         
     }
 
@@ -148,15 +160,20 @@ public class List {
 
     // todo create resize method
 
+    public void resize(){
+        list = Arrays.copyOf(list, list.length*2);
 
+        
+    }
     /*
      * The size method returns the value of the size.
-     * The purpose of the method is to announce the size of the list
+     * The purpose of the method is to announce the size of the listc
      * to the objects outside the list
      * 
      * The method returns an int. Empty list should return 0.
      */
     public int size() {
+        return this.size;
         
     }
 
@@ -184,7 +201,16 @@ public class List {
     public void remove(int index) {
         // write the logic for remove here.
         // Think about what to do to the size variable.
-        
+        if (this.size > index) {
+            for(int i =index;i<this.size;i++) {
+                list[i] = list[i+1];
+            }
+            list[this.size] = 0;
+            this.size--;
+        } else {
+            System.out.println("Index is out of bound");
+        }
+
     }
 
     /*
@@ -199,7 +225,10 @@ public class List {
      * number of items in the list? Would size variable be useful?
      */
     public int get(int index) {
-
+        if (this.size > index) 
+            return list[index];
+        else 
+            return -1;
     }
 
     /*
@@ -241,6 +270,12 @@ public class List {
      * the item exists and otherwise false
      */
     public boolean contains(int item) {
+        for(int i =0; i < this.size - 1;i++) {
+            if(list[i] == item){
+                return true;
+            }
+        }
+        return false;
         
     }
 
@@ -250,6 +285,13 @@ public class List {
      * or -1 if this list does not contain the element.
      */
     public int indexOf(int item) {
+        if (this.contains(item)) {
+            for(int i = 0;i < this.size;i++ ) {
+                if(list[i] == item)
+                    return i;
+            }
+        } 
+        return -1;
         
     }
 
